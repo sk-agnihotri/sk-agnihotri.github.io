@@ -14,13 +14,13 @@ coffeescript code down to JavaScript.
 
 ## Pre-requistes
 
-
+```bash
 
 # Install all dependencies
 npm install
 
 # Install the gulp command line tool
-npm install gulp --global
+sudo npm install gulp --global
 ```
 
 ## Running the development server
