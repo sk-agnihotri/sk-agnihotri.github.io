@@ -53,7 +53,7 @@ updateChartWithData = function(datasets) {
     return myChart.update();
   } else {
     return myChart = new Chart(document.getElementById("chart"), {
-      type: "scatter",
+      type: "bar",
       data: {
         datasets: datasets,
         xLabels: ["Sales"],
