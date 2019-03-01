@@ -29,9 +29,9 @@ errorWrapped = function(context, fn) {
 };
 
 DATASET_COLORS = {
-  "Furniture": "#f28e2b",
-  Technology: "#4e79a7",
-  "Office Supplies": "#e15759"
+  "Furniture": "green",
+  Technology: "blue",
+  "Office Supplies": "red"
 };
 
 addColorToDataset = function(d, color) {
@@ -53,7 +53,7 @@ updateChartWithData = function(datasets) {
     return myChart.update();
   } else {
     return myChart = new Chart(document.getElementById("chart"), {
-      type: "bubble",
+      type: "scatter",
       data: {
         datasets: datasets,
         xLabels: ["Sales"],
