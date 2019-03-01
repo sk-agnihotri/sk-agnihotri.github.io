@@ -29,9 +29,9 @@ errorWrapped = function(context, fn) {
 };
 
 DATASET_COLORS = {
-  "Furniture": "red",
-  Technology: "green",
-  "Office Supplies": "yellow"
+  "Furniture": "green",
+  "Technology": "yellow",
+  "Office Supplies": "red"
 };
 
 addColorToDataset = function(d, color) {
