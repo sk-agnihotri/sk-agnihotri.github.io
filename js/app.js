@@ -29,9 +29,15 @@ errorWrapped = function(context, fn) {
 };
 
 DATASET_COLORS = {
+<<<<<<< HEAD
   "Furniture": "green",
   "Technology": "yellow",
   "Office Supplies": "red"
+=======
+  "Furniture": "Green",
+  Technology: "Yellow",
+  "Office Supplies": "Red"
+>>>>>>> 5596218e25c5794090e65c9fefcc5a69301af7e6
 };
 
 addColorToDataset = function(d, color) {
@@ -53,7 +59,7 @@ updateChartWithData = function(datasets) {
     return myChart.update();
   } else {
     return myChart = new Chart(document.getElementById("chart"), {
-      type: "scatter",
+      type: "Scatter",
       data: {
         datasets: datasets,
         xLabels: ["Sales"],
