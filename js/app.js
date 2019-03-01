@@ -19,9 +19,9 @@ errorWrapped = (context, fn)->
       console.error "Got error during '", context, "' : ", err
 
 DATASET_COLORS =
-  "Furniture": "red"
-  Technology: "green"
-  "Office Supplies": "yellow"
+  "Furniture": "#f28e2b"
+  Technology: "#4e79a7"
+  "Office Supplies": "#e15759"
 
 
 
@@ -45,7 +45,7 @@ updateChartWithData = (datasets)->
 
   else
     myChart = new Chart document.getElementById("chart"),
-        type: "scatter"
+        type: "bubble"
         data:
           datasets: datasets
           xLabels: ["Sales"]
@@ -114,4 +114,3 @@ initChart = ->
   initChart,
   myChart
 }
-
