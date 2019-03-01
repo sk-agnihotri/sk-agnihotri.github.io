@@ -20,7 +20,7 @@ errorWrapped = (context, fn)->
 
 DATASET_COLORS =
   "Furniture": "red"
-  Technology: "green"
+  "Technology": "green"
   "Office Supplies": "yellow"
 
 
