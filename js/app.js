@@ -19,7 +19,6 @@ errorWrapped = function(context, fn) {
   return function() {
     var args, err, error;
     args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    console.log(args);
     try {
       return fn.apply(null, args);
     } catch (error) {
