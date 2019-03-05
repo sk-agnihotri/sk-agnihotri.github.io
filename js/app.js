@@ -1,5 +1,5 @@
-var DATASET_COLORS, addColorToDataset, errorWrapped, getCurrentViz, getCurrentWorksheet, getTableau, initChart, myChart, updateChartWithData,
-  slice = [].slice;
+var DATASET_COLORS, addColorToDataset, errorWrapped, getCurrentViz, getCurrentWorksheet, getTableau, initChart, myChart, 
+updateChartWithData, slice = [].slice;
 
 myChart = null;
 
@@ -29,9 +29,10 @@ errorWrapped = function(context, fn) {
 };
 
 DATASET_COLORS = {
-  "Furniture": "green",
-  Technology: "blue",
-  "Office Supplies": "red"
+  "Same Venue": "green",
+  Others: "blue",
+  "New Venue": "red",
+  "Closed Venue": "yellow"
 };
 
 addColorToDataset = function(d, color) {
@@ -43,7 +44,7 @@ updateChartWithData = function(datasets) {
   var d, i, j, k, len, len1;
   for (j = 0, len = datasets.length; j < len; j++) {
     d = datasets[j];
-    addColorToDataset(d, DATASET_COLORS[d.data[0].category]);
+    addColorToDataset(d, DATASET_COLORS[d.data[0].Ploc_Category]);
   }
   if (myChart) {
     for (i = k = 0, len1 = datasets.length; k < len1; i = ++k) {
@@ -56,12 +57,12 @@ updateChartWithData = function(datasets) {
       type: "bubble",
       data: {
         datasets: datasets,
-        xLabels: ["Sales"],
-        yLabels: ["Profit"]
+        xLabels: ["CY Revenue Actual"],
+        yLabels: ["CY Revenue Bud"]
       },
       options: {
         animation: {
-          duration: 1000
+          duration: 5000
         },
         responsive: true,
         maintainAspectRatio: false,
@@ -70,7 +71,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "Profit"
+                labelString: "CY Revenue Bud"
               }
             }
           ],
@@ -78,7 +79,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "Sales"
+                labelString: "CY Revenue Actual"
               }
             }
           ]
@@ -95,23 +96,23 @@ initChart = function() {
     return console.err("Error during Tableau Async request:", err);
   };
   onDataLoadOk = errorWrapped("Getting data from Tableau", function(table) {
-    var Category, Profit, Sales, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
+    var Ploc_Category, CY Revenue Bud, CY Revenue Actual, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
     colIdxMaps = {};
     ref = table.getColumns();
     for (j = 0, len = ref.length; j < len; j++) {
       c = ref[j];
       colIdxMaps[c.getFieldName()] = c.getIndex();
     }
-    Category = colIdxMaps.Category, Sales = colIdxMaps.Sales, Profit = colIdxMaps.Profit;
+    Ploc_Category = colIdxMaps.Ploc_Category, CY Revenue Actual = colIdxMaps.CY Revenue Actual, CY Revenue Bud = colIdxMaps.CY Revenue Bud;
     toChartEntry = function(d) {
       return {
-        x: parseFloat(d[Sales].value).toFixed(2),
-        y: parseFloat(d[Profit].value).toFixed(2),
-        category: d[Category].value,
+        x: parseFloat(d[CY Revenue Actual].value).toFixed(2),
+        y: parseFloat(d[CY Revenue Bud].value).toFixed(2),
+        Ploc_Category: d[Ploc_Category].value,
         r: 5
       };
     };
-    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("category").map(function(data, label) {
+    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("Ploc_Category").map(function(data, label) {
       return {
         label: label,
         data: data
