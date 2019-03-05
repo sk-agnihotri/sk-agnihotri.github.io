@@ -57,8 +57,8 @@ updateChartWithData = function(datasets) {
       type: "bubble",
       data: {
         datasets: datasets,
-        xLabels: ["CY Revenue Actual"],
-        yLabels: ["CY Revenue Bud"]
+        xLabels: ["CYRA"],
+        yLabels: ["CYRB"]
       },
       options: {
         animation: {
@@ -71,7 +71,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "CY Revenue Bud"
+                labelString: "CYRB"
               }
             }
           ],
@@ -79,7 +79,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "CY Revenue Actual"
+                labelString: "CYRA"
               }
             }
           ]
@@ -96,18 +96,18 @@ initChart = function() {
     return console.err("Error during Tableau Async request:", err);
   };
   onDataLoadOk = errorWrapped("Getting data from Tableau", function(table) {
-    var Ploc_Category, CY Revenue Bud, CY Revenue Actual, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
+    var Ploc_Category, CYRB, CYRA, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
     colIdxMaps = {};
     ref = table.getColumns();
     for (j = 0, len = ref.length; j < len; j++) {
       c = ref[j];
       colIdxMaps[c.getFieldName()] = c.getIndex();
     }
-    Ploc_Category = colIdxMaps.Ploc_Category, CY Revenue Actual = colIdxMaps.CY Revenue Actual, CY Revenue Bud = colIdxMaps.CY Revenue Bud;
+    Ploc_Category = colIdxMaps.Ploc_Category, CYRA = colIdxMaps.CYRA, CYRB = colIdxMaps.CYRB;
     toChartEntry = function(d) {
       return {
-        x: parseFloat(d[CY Revenue Actual].value).toFixed(2),
-        y: parseFloat(d[CY Revenue Bud].value).toFixed(2),
+        x: parseFloat(d[CYRA].value).toFixed(2),
+        y: parseFloat(d[CYRB].value).toFixed(2),
         Ploc_Category: d[Ploc_Category].value,
         r: 5
       };
