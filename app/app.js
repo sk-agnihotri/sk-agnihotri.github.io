@@ -30,8 +30,8 @@ errorWrapped = function(context, fn) {
 
 DATASET_COLORS = {
   "Furniture": "green",
-  Technology: "blue",
-  "Office Supplies": "red"
+  Technology: "red",
+  "Office Supplies": "blue"
 };
 
 addColorToDataset = function(d, color) {
@@ -53,7 +53,7 @@ updateChartWithData = function(datasets) {
     return myChart.update();
   } else {
     return myChart = new Chart(document.getElementById("chart"), {
-      type: "bar",
+      type: "scatter",
       data: {
         datasets: datasets,
         xLabels: ["Sales"],
