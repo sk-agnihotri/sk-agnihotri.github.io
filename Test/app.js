@@ -34,7 +34,7 @@ DATASET_COLORS = {
   "Offsite": "yellow",
   "Scott Nodsle": "tan",
   "Scott Tomlinson": "blue",
-  "Tim Gray": "purple",
+  Tim Gray: "purple",
   "Todd Hester": "orange",
   "Tom Povich": "navy",
   Null: "slategrey"
@@ -67,7 +67,7 @@ updateChartWithData = function(datasets) {
       },
       options: {
         animation: {
-          duration: 5000
+          duration: 500
         },
         responsive: true,
         maintainAspectRatio: false,
