@@ -30,7 +30,7 @@ errorWrapped = function(context, fn) {
 
 DATASET_COLORS = {
   "Yes": "green",
-  Null: "red",
+  %null%: "red",
   "No": "blue"
 };
 
@@ -53,7 +53,7 @@ updateChartWithData = function(datasets) {
     return myChart.update();
   } else {
     return myChart = new Chart(document.getElementById("chart"), {
-      type: "bubble",
+      type: "bar",
       data: {
         datasets: datasets,
         xLabels: ["CYMTD_Detractor"],
@@ -61,7 +61,7 @@ updateChartWithData = function(datasets) {
       },
       options: {
         animation: {
-          duration: 1000
+          duration: 5000
         },
         responsive: true,
         maintainAspectRatio: false,
