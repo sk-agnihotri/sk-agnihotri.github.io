@@ -1,5 +1,5 @@
-var DATASET_COLORS, addColorToDataset, errorWrapped, getCurrentViz, getCurrentWorksheet, getTableau, initChart, myChart, 
-updateChartWithData, slice = [].slice;
+var DATASET_COLORS, addColorToDataset, errorWrapped, getCurrentViz, getCurrentWorksheet, getTableau, initChart, myChart, updateChartWithData,
+  slice = [].slice;
 
 myChart = null;
 
@@ -29,10 +29,9 @@ errorWrapped = function(context, fn) {
 };
 
 DATASET_COLORS = {
-  "Same Venue": "green",
-  Others: "blue",
-  "New Venue": "red",
-  "Closed Venue": "yellow"
+  "Furniture": "green",
+  Technology: "red",
+  "Office Supplies": "blue"
 };
 
 addColorToDataset = function(d, color) {
@@ -44,7 +43,7 @@ updateChartWithData = function(datasets) {
   var d, i, j, k, len, len1;
   for (j = 0, len = datasets.length; j < len; j++) {
     d = datasets[j];
-    addColorToDataset(d, DATASET_COLORS[d.data[0].Ploc_Category]);
+    addColorToDataset(d, DATASET_COLORS[d.data[0].variety]);
   }
   if (myChart) {
     for (i = k = 0, len1 = datasets.length; k < len1; i = ++k) {
@@ -54,11 +53,11 @@ updateChartWithData = function(datasets) {
     return myChart.update();
   } else {
     return myChart = new Chart(document.getElementById("chart"), {
-      type: "bubble",
+      type: "scatter",
       data: {
         datasets: datasets,
-        xLabels: ["CYRA"],
-        yLabels: ["CYRB"]
+        xLabels: ["Sold"],
+        yLabels: ["Gain"]
       },
       options: {
         animation: {
@@ -71,7 +70,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "CYRB"
+                labelString: "Gain"
               }
             }
           ],
@@ -79,7 +78,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "CYRA"
+                labelString: "Sold"
               }
             }
           ]
@@ -96,23 +95,23 @@ initChart = function() {
     return console.err("Error during Tableau Async request:", err);
   };
   onDataLoadOk = errorWrapped("Getting data from Tableau", function(table) {
-    var Ploc_Category, CYRB, CYRA, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
+    var Variety, Gain, Sold, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
     colIdxMaps = {};
     ref = table.getColumns();
     for (j = 0, len = ref.length; j < len; j++) {
       c = ref[j];
       colIdxMaps[c.getFieldName()] = c.getIndex();
     }
-    Ploc_Category = colIdxMaps.Ploc_Category, CYRA = colIdxMaps.CYRA, CYRB = colIdxMaps.CYRB;
+    Variety = colIdxMaps.Variety, Sold = colIdxMaps.Sold, Gain = colIdxMaps.Gain;
     toChartEntry = function(d) {
       return {
-        x: parseFloat(d[CYRA].value).toFixed(2),
-        y: parseFloat(d[CYRB].value).toFixed(2),
-        Ploc_Category: d[Ploc_Category].value,
-        r: 5
+        x: parseFloat(d[Sold].value).toFixed(2),
+        y: parseFloat(d[Gain].value).toFixed(2),
+        variety: d[Variety].value,
+        r: 10
       };
     };
-    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("Ploc_Category").map(function(data, label) {
+    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("variety").map(function(data, label) {
       return {
         label: label,
         data: data
