@@ -29,9 +29,15 @@ errorWrapped = function(context, fn) {
 };
 
 DATASET_COLORS = {
-  "Yes": "green",
-  Null: "red",
-  "No": "blue"
+  "Karen Quill": "red",
+  "Kevin Wanamaker": "green",
+  "Offsite": "yellow",
+  "Scott Nodsle": "tan",
+  "Scott Tomlinson": "blue",
+  "Tim Gray": "purple",
+  "Todd Hester": "orange",
+  "Tom Povich": "navy",
+  Null: "slategrey"
 };
 
 addColorToDataset = function(d, color) {
@@ -43,7 +49,7 @@ updateChartWithData = function(datasets) {
   var d, i, j, k, len, len1;
   for (j = 0, len = datasets.length; j < len; j++) {
     d = datasets[j];
-    addColorToDataset(d, DATASET_COLORS[d.data[0].SellerLocation]);
+    addColorToDataset(d, DATASET_COLORS[d.data[0].DVP]);
   }
   if (myChart) {
     for (i = k = 0, len1 = datasets.length; k < len1; i = ++k) {
@@ -95,23 +101,23 @@ initChart = function() {
     return console.err("Error during Tableau Async request:", err);
   };
   onDataLoadOk = errorWrapped("Getting data from Tableau", function(table) {
-    var SellerLocation, CYMTD_SurveyCount, CYMTD_Detractor, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
+    var DVP, CYMTD_SurveyCount, CYMTD_Detractor, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
     colIdxMaps = {};
     ref = table.getColumns();
     for (j = 0, len = ref.length; j < len; j++) {
       c = ref[j];
       colIdxMaps[c.getFieldName()] = c.getIndex();
     }
-    SellerLocation = colIdxMaps.SellerLocation, CYMTD_Detractor = colIdxMaps.CYMTD_Detractor, CYMTD_SurveyCount = colIdxMaps.CYMTD_SurveyCount;
+    DVP = colIdxMaps.DVP, CYMTD_Detractor = colIdxMaps.CYMTD_Detractor, CYMTD_SurveyCount = colIdxMaps.CYMTD_SurveyCount;
     toChartEntry = function(d) {
       return {
         x: parseFloat(d[CYMTD_Detractor].value).toFixed(2),
         y: parseFloat(d[CYMTD_SurveyCount].value).toFixed(2),
-        SellerLocation: d[SellerLocation].value,
+        DVP: d[DVP].value,
         r: 10
       };
     };
-    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("SellerLocation").map(function(data, label) {
+    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("DVP").map(function(data, label) {
       return {
         label: label,
         data: data
