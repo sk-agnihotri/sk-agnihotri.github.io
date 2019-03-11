@@ -30,7 +30,7 @@ errorWrapped = function(context, fn) {
 
 DATASET_COLORS = {
   "Yes": "green",
-  %null%: "red",
+  Null: "red",
   "No": "blue"
 };
 
