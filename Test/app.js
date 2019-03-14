@@ -30,14 +30,14 @@ errorWrapped = function(context, fn) {
 
 DATASET_COLORS = {
   "Karen Quill": "red",
-  "Kevin Wanamaker": "green",
-  "Offsite": "yellow",
-  "Scott Nodsle": "tan",
-  "Scott Tomlinson": "blue",
-  "Tim Gray": "purple",
-  "Todd Hester": "orange",
-  "Tom Povich": "navy",
-  Null: "slategrey"
+  //"Kevin Wanamaker": "green",
+  //"Offsite": "yellow",
+  //"Scott Nodsle": "tan",
+  //"Scott Tomlinson": "blue",
+  //"Tim Gray": "purple",
+  //"Todd Hester": "orange",
+  //"Tom Povich": "navy",
+  //Null: "slategrey"
 };
 
 addColorToDataset = function(d, color) {
@@ -67,7 +67,7 @@ updateChartWithData = function(datasets) {
       },
       options: {
         animation: {
-          duration: 500
+          duration: 1000
         },
         responsive: true,
         maintainAspectRatio: false,
@@ -114,7 +114,7 @@ initChart = function() {
         x: parseFloat(d[CYMTD_Detractor].value).toFixed(2),
         y: parseFloat(d[CYMTD_SurveyCount].value).toFixed(2),
         DVP: d[DVP].value,
-        r: 10
+        r: 5
       };
     };
     graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("DVP").map(function(data, label) {
