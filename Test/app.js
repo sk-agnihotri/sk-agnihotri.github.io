@@ -29,14 +29,14 @@ errorWrapped = function(context, fn) {
 };
 
 DATASET_COLORS = {
-  Karen Quill: "red",
-  Kevin Wanamaker: "green",
-  Offsite: "yellow",
-  Scott Nodsle: "tan",
-  Scott Tomlinson: "blue",
-  Tim Gray: "purple",
-  Todd Hester: "orange",
-  Tom Povich: "navy",
+  "Karen Quill": "red",
+  "Kevin Wanamaker": "green",
+  "Offsite": "yellow",
+  "Scott Nodsle": "tan",
+  "Scott Tomlinson": "blue",
+  "Tim Gray": "purple",
+  "Todd Hester": "orange",
+  "Tom Povich": "navy",
   Null: "slategrey"
 };
 
