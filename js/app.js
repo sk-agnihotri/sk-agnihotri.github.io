@@ -18,7 +18,7 @@ getCurrentWorksheet = function() {
 errorWrapped = function(context, fn) {
   return function() {
     var args, err, error;
-    args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    args = arguments.length >= 1 ? slice.call(arguments, 0) : [];
     try {
       return fn.apply(null, args);
     } catch (error) {
@@ -43,7 +43,7 @@ updateChartWithData = function(datasets) {
   var d, i, j, k, len, len1;
   for (j = 0, len = datasets.length; j < len; j++) {
     d = datasets[j];
-    addColorToDataset(d, DATASET_COLORS[d.data[0].variety]);
+    addColorToDataset(d, DATASET_COLORS[d.data[0].Category]);
   }
   if (myChart) {
     for (i = k = 0, len1 = datasets.length; k < len1; i = ++k) {
@@ -56,12 +56,12 @@ updateChartWithData = function(datasets) {
       type: "scatter",
       data: {
         datasets: datasets,
-        xLabels: ["Sold"],
-        yLabels: ["Gain"]
+        xLabels: ["Sales"],
+        yLabels: ["Profit"]
       },
       options: {
         animation: {
-          duration: 5000
+          duration: 1000
         },
         responsive: true,
         maintainAspectRatio: false,
@@ -70,7 +70,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "Gain"
+                labelString: "Profit"
               }
             }
           ],
@@ -78,7 +78,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "Sold"
+                labelString: "Sales"
               }
             }
           ]
@@ -95,23 +95,23 @@ initChart = function() {
     return console.err("Error during Tableau Async request:", err);
   };
   onDataLoadOk = errorWrapped("Getting data from Tableau", function(table) {
-    var Variety, Gain, Sold, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
+    var Category, Profit, Sales, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
     colIdxMaps = {};
     ref = table.getColumns();
     for (j = 0, len = ref.length; j < len; j++) {
       c = ref[j];
       colIdxMaps[c.getFieldName()] = c.getIndex();
     }
-    Variety = colIdxMaps.Variety, Sold = colIdxMaps.Sold, Gain = colIdxMaps.Gain;
+    Category = colIdxMaps.Category, Sales = colIdxMaps.Sales, Profit = colIdxMaps.Profit;
     toChartEntry = function(d) {
       return {
-        x: parseFloat(d[Sold].value).toFixed(2),
-        y: parseFloat(d[Gain].value).toFixed(2),
-        variety: d[Variety].value,
+        x: parseFloat(d[Sales].value).toFixed(2),
+        y: parseFloat(d[Profit].value).toFixed(2),
+        Category: d[Category].value,
         r: 10
       };
     };
-    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("variety").map(function(data, label) {
+    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("Category").map(function(data, label) {
       return {
         label: label,
         data: data
