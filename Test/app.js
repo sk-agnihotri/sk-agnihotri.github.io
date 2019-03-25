@@ -118,10 +118,9 @@ initChart = function() {
       };
     };
     graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("DVP").map(function(data, label) {
-      return {
-        label: label,
-        data: data
-      };
+      return { data: data,
+			   label: label
+              };
     }).value();
     return errorWrapped("Updating the chart", updateChartWithData)(graphDataByCategory);
   });
