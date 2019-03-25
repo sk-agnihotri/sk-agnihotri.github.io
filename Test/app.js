@@ -1,9 +1,9 @@
 var DATASET_COLORS, addColorToDataset, errorWrapped, getCurrentViz, getCurrentWorksheet, getTableau, initChart, myChart, updateChartWithData,
   slice = [].slice;
 
-/* myChart = null;
+# myChart = null;
 
-*/getTableau = function() {
+getTableau = function() {
   return parent.parent.tableau;
 };
 
@@ -28,19 +28,19 @@ errorWrapped = function(context, fn) {
   };
 };
 
-/*DATASET_COLORS = {
-  "Karen Quill": "red",
-  "Kevin Wanamaker": "green",
-  "Offsite": "yellow",
-  "Scott Nodsle": "tan",
-  "Scott Tomlinson": "blue",
-  "Tim Gray": "purple",
-  "Todd Hester": "orange",
-  "Tom Povich": "navy",
+DATASET_COLORS = {
+  Karen Quill: "red",
+  Kevin Wanamaker: "green",
+  Offsite: "yellow",
+  Scott Nodsle: "tan",
+  Scott Tomlinson: "blue",
+  Tim Gray: "purple",
+  Todd Hester: "orange",
+  Tom Povich: "navy",
   Null: "slategrey"
 };
 
-*/addColorToDataset = function(d, color) {
+addColorToDataset = function(d, color) {
   d.backgroundColor = color;
   return d.hoverBackgroundColor = color;
 };
