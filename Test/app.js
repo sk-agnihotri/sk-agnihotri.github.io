@@ -117,7 +117,7 @@ initChart = function() {
         r: 5
       };
     };
-    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("SVP").map(function(data, label) {
+    graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("DVP").map(function(data, label) {
       return {
         label: label,
         data: data
