@@ -1,9 +1,9 @@
 var DATASET_COLORS, addColorToDataset, errorWrapped, getCurrentViz, getCurrentWorksheet, getTableau, initChart, myChart, updateChartWithData,
   slice = [].slice;
-  
-myChart = null;
 
-getTableau = function() {
+/* myChart = null;
+
+*/getTableau = function() {
   return parent.parent.tableau;
 };
 
@@ -18,7 +18,7 @@ getCurrentWorksheet = function() {
 errorWrapped = function(context, fn) {
   return function() {
     var args, err, error;
-    args = arguments.length >= 1 ? slice.call(arguments, 0) : [];
+    args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
     try {
       return fn.apply(null, args);
     } catch (error) {
@@ -118,9 +118,10 @@ initChart = function() {
       };
     };
     graphDataByCategory = _.chain(table.getData()).map(toChartEntry).groupBy("DVP").map(function(data, label) {
-      return { data: data,
-			   label: label
-              };
+      return {
+        label: label,
+        data: data
+      };
     }).value();
     return errorWrapped("Updating the chart", updateChartWithData)(graphDataByCategory);
   });
