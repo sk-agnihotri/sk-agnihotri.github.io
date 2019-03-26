@@ -37,7 +37,7 @@ DATASET_COLORS = {
   "Tim Gray": "purple",
   "Todd Hester": "orange",
   "Tom Povich": "navy",
-  Null: "slategrey"
+  "NULL": "red"
 };
 
 addColorToDataset = function(d, color) {
@@ -63,11 +63,11 @@ updateChartWithData = function(datasets) {
       data: {
         datasets: datasets,
         xLabels: ["CYMTD_Detractor"],
-        yLabels: ["CYMTD_SurveyCount"]
+        yLabels: ["CYMTD_Promoter"]
       },
       options: {
         animation: {
-          duration: 1000
+          duration: 5000
         },
         responsive: true,
         maintainAspectRatio: false,
@@ -76,7 +76,7 @@ updateChartWithData = function(datasets) {
             {
               scaleLabel: {
                 display: true,
-                labelString: "CYMTD_SurveyCount"
+                labelString: "CYMTD_Promoter"
               }
             }
           ],
@@ -101,19 +101,19 @@ initChart = function() {
     return console.err("Error during Tableau Async request:", err);
   };
   onDataLoadOk = errorWrapped("Getting data from Tableau", function(table) {
-    var DVP, CYMTD_SurveyCount, CYMTD_Detractor, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
+    var DVP, CYMTD_Promoter, CYMTD_Detractor, c, colIdxMaps, graphDataByCategory, j, len, ref, toChartEntry;
     colIdxMaps = {};
     ref = table.getColumns();
     for (j = 0, len = ref.length; j < len; j++) {
       c = ref[j];
       colIdxMaps[c.getFieldName()] = c.getIndex();
     }
-    DVP = colIdxMaps.DVP, CYMTD_Detractor = colIdxMaps.CYMTD_Detractor, CYMTD_SurveyCount = colIdxMaps.CYMTD_SurveyCount;
+    DVP = colIdxMaps.DVP, CYMTD_Detractor = colIdxMaps.CYMTD_Detractor, CYMTD_Promoter = colIdxMaps.CYMTD_Promoter;
     toChartEntry = function(d) {
       return {
+		DVP: d[DVP].value,
         x: parseFloat(d[CYMTD_Detractor].value).toFixed(2),
-        y: parseFloat(d[CYMTD_SurveyCount].value).toFixed(2),
-        DVP: d[DVP].value,
+        y: parseFloat(d[CYMTD_Promoter].value).toFixed(2),
         r: 5
       };
     };
