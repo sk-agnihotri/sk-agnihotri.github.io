@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hierarchy Example</title>
+
+    <style>
+
+	.node {
+		cursor: pointer;
+	}
+
+	.node circle {
+	  fill: green;
+	  stroke: red;
+	  stroke-width: 3px;
+	}
+
+	.node text {
+	  font: 12px sans-serif;
+	}
+
+	.link {
+	  fill: none;
+	  stroke: #ccc;
+	  stroke-width: 2px;
+	}
+
+    </style>
+
+  </head>
+
+  <body>
+
+  </body>
+  <!-- load the d3.js library -->
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+
+  <script>
+
+  var treeData = [
+  {"name": "Mcilwain Joseph M.",
+  "parent": "null",
+  "children": [
+          {
+            "name": "Erwin Benjamin E.",
+            "parent": "Joseph M.	Mcilwain",
+            "children": [
+              {
+                "name": "Chakiris	Nicholas S.",
+                "parent": "Erwin Benjamin E.",
+                "children": [
+                  {
+                    "name": "Darding Andrew R.",
+                    "parent": "Chakiris	Nicholas S."
+                  },
+                  {
+                    "name": "Rogers Steven W.",
+                    "parent": "Chakiris	Nicholas S."
+                  },
+                  {
+                    "name": "Duffy Anthony J.",
+                    "parent": "Chakiris	Nicholas S."
+                  },
+                  {
+                    "name": "LaRocco Edward A.",
+                    "parent": "Chakiris	Nicholas S."
+                  },
+                  {
+                    "name": "Wong Han N.",
+                    "parent": "Chakiris	Nicholas S."
+                  },
+                  {
+                    "name": "Gugora Victoria T.",
+                    "parent": "Chakiris	Nicholas S."
+                  }
+                ]
+              },
+              {
+                "name": "Kroll Adam B.",
+                "parent": "Erwin Benjamin E.",
+                "children": [
+                  {
+                    "name": "Boye Nils P.",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Halles Hope D.",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Razvi Nylah Y.",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Gillis Sean M.",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Turner James A.",
+                    "parent": "Kroll Adam B."
+                  }
+                ]
+              },
+              {
+                "name": "Kozik Catherine E.",
+                "parent": "Erwin Benjamin E.",
+                "children": [
+                  {
+                    "name": "Solon Kathy",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Vincent Wayne M.",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Mehta Bhavin B.",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Misner Gary W.",
+                    "parent": "Kroll Adam B."
+                  },
+                  {
+                    "name": "Mahmood Nasir U.",
+                    "parent": "Kroll Adam B."
+                  }
+                ]
+              },
+              {
+                "name": "Moody Annette",
+                "parent": "Erwin Benjamin E.",
+                "children": [
+                  {
+                    "name": "Johnsen Matthew",
+                    "parent": "Moody Annette"
+                  },
+                  {
+                    "name": "Satterfield Jason W.",
+                    "parent": "Moody Annette"
+                  },
+                  {
+                    "name": "Hauptman Joseph D.",
+                    "parent": "Moody Annette"
+                  },
+                  {
+                    "name": "Coleman Derek L.",
+                    "parent": "Moody Annette"
+                  },
+                  {
+                    "name": "Spencer Todd M.",
+                    "parent": "Moody Annette"
+                  },
+                  {
+                    "name": "Harvey Matthew",
+                    "parent": "Moody Annette"
+                  },
+                  {
+                    "name": "Rogers Brent M.",
+                    "parent": "Moody Annette"
+                  }
+                ]
+              },
+              {
+                "name": "Stengel Michael J.",
+                "parent": "Erwin Benjamin E.",
+                "children":[
+                  {
+                    "name": "Gray Timothy W.",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Petering Charles",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Szoldra Carol A.",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Naylor Richard D.",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Bhathena Nozer",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Schilz Michael",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Milhomme Sylvain",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Bandu Ciprian",
+                    "parent": "Stengel Michael J."
+                  },
+                  {
+                    "name": "Kendrick Johnny M.",
+                    "parent": "Stengel Michael J."
+                  }
+                ]
+              },
+              {
+                "name": "Roe Keith E.",
+                "parent": "Erwin Benjamin E.",
+                "children":[
+                  {
+                    "name": "Hester Michael T.",
+                    "parent": "Roe Keith E."
+                  },
+                  {
+                    "name": "Nodsle Scott J.",
+                    "parent": "Roe Keith E."
+                  },
+                  {
+                    "name": "Povich Tom",
+                    "parent": "Roe Keith E."
+                  }
+              ]
+              },
+              {
+                "name": "Russell Kenneth A.",
+                "parent": "Erwin Benjamin E.",
+                "children": [
+                  {
+                    "name": "Worley Dustin G.",
+                    "parent": "Russell Kenneth A."
+                  },
+                  {
+                    "name": "Oliver Steven",
+                    "parent": "Russell Kenneth A."
+                  },
+                  {
+                    "name": "Whittaker Elizabeth B.",
+                    "parent": "Russell Kenneth A."
+                  }
+              ]
+              },
+              {
+                "name": "Hill J C.",
+                "parent": "Erwin Benjamin E.",
+                "children":[
+                  {
+                    "name":"Brahms Alex",
+                    "parent":"Hill J C."
+                  },
+                  {
+                    "name":"Wanamaker	Kevin",
+                    "parent":"Hill J C."
+                  },
+                  {
+                    "name":"Gmoser Ken",
+                    "parent":"Hill J C."
+                  },
+                  {
+                    "name":"Williams Brett H.",
+                    "parent":"Hill J C."
+                  },
+                  {
+                    "name":"Quill Karen M.",
+                    "parent":"Hill J C."
+                  },
+                  {
+                    "name":"Mchugh Michael A.",
+                    "parent":"Hill J C."
+                  },
+                  {
+                    "name":"Stout David J.",
+                    "parent":"Hill J C."
+                  },
+                  {
+                    "name":"Mortillo Philip A.",
+                    "parent":"Hill J C."
+                  }
+              ]
+              }
+            ]
+          },
+          {
+            "name": "Young Charles",
+            "parent": "Joseph M.	Mcilwain",
+            "children": [
+              {
+                "name": "Russell Kellie M.",
+                "parent": "Young Charles",
+                "children":[
+                  {
+                    "name":"Brassington Laura S.",
+                    "parent":"Russell Kellie M."
+                  },
+                  {
+                    "name":"Larson Eric W.",
+                    "parent":"Russell Kellie M."
+                  },
+                  {
+                    "name":"Silverman Sam",
+                    "parent":"Russell Kellie M."
+                  },
+                  {
+                    "name":"Mraz Melanie R.",
+                    "parent":"Russell Kellie M."
+                  },
+                  {
+                    "name":"Mosquera Santiago A.",
+                    "parent":"Russell Kellie M."
+                  },
+                  {
+                    "name":"Crisp Sonya E.",
+                    "parent":"Russell Kellie M."
+                  }
+              ]
+              },
+              {
+                "name": "Vissers Vermaas Patricia G.",
+                "parent": "Young Charles",
+                "children":[
+                  {
+                    "name":"Krause Glenda",
+                    "parent":"Vissers Vermaas Patricia G."
+                  },
+                  {
+                    "name":"Butler Tiffany L.",
+                    "parent":"Vissers Vermaas Patricia G."
+                  }
+             ]
+              },
+              {
+                "name": "Caldrone Jr. Robert F.",
+                "parent": "Young Charles",
+                "children":[
+                  {
+                    "name":"Agostino Jeannine",
+                    "parent":"Caldrone Jr. Robert F."
+                  },
+                  {
+                    "name":"Sassen Erin E.",
+                    "parent":"Caldrone Jr. Robert F."
+                  },
+                  {
+                    "name":"Ossenheimer Steve G.",
+                    "parent":"Caldrone Jr. Robert F."
+                  },
+                  {
+                    "name":"Lamb Erin",
+                    "parent":"Caldrone Jr. Robert F."
+                  },
+                  {
+                    "name":"Nettle Leah M.",
+                    "parent":"Caldrone Jr. Robert F."
+                  }
+              ]
+              },
+              {
+                "name": "Costello MaryBeth",
+                "parent": "Young Charles",
+                "children":[
+                  {
+                    "name":"Blake Derek S.",
+                    "parent":"Costello MaryBeth"
+                  },
+                  {
+                    "name":"Boerner Ashley",
+                    "parent":"Costello MaryBeth"
+                  },
+                  {
+                    "name":"Wojcik Mark S.",
+                    "parent":"Costello MaryBeth"
+                  }
+              ]
+              },
+              {
+                "name": "Schleyer Jr. Carl H.",
+                "parent": "Young Charles",
+                "children":[
+                  {
+                    "name":"Daily Robert",
+                    "parent":"Schleyer Jr. Carl H."
+                  },
+                  {
+                    "name":"Winkler George B.",
+                    "parent":"Schleyer Jr. Carl H."
+                  },
+                  {
+                    "name":"Bey Kathryn",
+                    "parent":"Schleyer Jr. Carl H."
+                  }
+              ]
+              }
+            ]
+          },
+          {
+            "name": "Markowitz James W.",
+            "parent": "Joseph M.	Mcilwain",
+            "children": [
+              {
+                "name": "Brand Jean M.",
+                "parent": "Markowitz James W.",
+                "children": [
+                  {
+                    "name": "Vissers Sarah",
+                    "parent": "Brand Jean M."
+                  }
+              ]
+              },
+              {
+                "name": "Melendez Janalin D.",
+                "parent": "Markowitz James W."
+              },
+              {
+                "name": "Falco Jonathan A.",
+                "parent": "Markowitz James W.",
+                "children": [
+                  {
+                    "name": "Christian Donna M.",
+                    "parent": "Falco Jonathan A."
+                  },
+                   {
+                    "name": "Koburi Kyle",
+                    "parent": "Falco Jonathan A."
+                  }
+              ]
+              },
+              {
+                "name": "Klein Deborah J.",
+                "parent": "Markowitz James W.",
+                "children": [
+                  {
+                    "name": "Reiss Marlene G.",
+                    "parent": "Klein Deborah J."
+                  },
+                   {
+                    "name": "Walter Carl F.",
+                    "parent": "Klein Deborah J."
+                  }
+              ]
+              }
+            ]
+          },
+          {
+            "name": "Leone Michael J.",
+            "parent": "Joseph M.	Mcilwain",
+            "children": [
+              {
+                "name": "Rissi John B.",
+                "parent": "Leone Michael J.",
+                "children": [
+                  {
+                    "name": "Hubley Donna M.",
+                    "parent": "Rissi John B."
+                  },
+                  {
+                    "name": "Demarco Anthony N.",
+                    "parent": "Rissi John B."
+                  },
+                  {
+                    "name": "St Amant Christina A.",
+                    "parent": "Rissi John B."
+                  },
+                  {
+                    "name": "Mullins Aaron W.",
+                    "parent": "Rissi John B."
+                  },
+                  {
+                    "name": "Wessling Teresa A.",
+                    "parent": "Rissi John B."
+                  },
+                  {
+                    "name": "Caron Craig S.",
+                    "parent": "Rissi John B."
+                  },
+                  {
+                    "name": "Barnes Richard L.",
+                    "parent": "Rissi John B."
+                  }
+              ]
+              },
+              {
+                "name": "Santo Joseph G.",
+                "parent": "Leone Michael J.",
+                "children":[
+                  {
+                    "name": "Cooper Hali G.",
+                    "parent": "Santo Joseph G."
+                  },
+                  {
+                    "name": "Young Stewart A.",
+                    "parent": "Santo Joseph G."
+                  },
+                  {
+                    "name": "Valois Eileen M.",
+                    "parent": "Santo Joseph G."
+                  },
+                  {
+                    "name": "Storto Maureen",
+                    "parent": "Santo Joseph G."
+                  },
+                  {
+                    "name": "Floyd Michael A.",
+                    "parent": "Santo Joseph G."
+                  },
+                  {
+                    "name": "Shank William C.",
+                    "parent": "Santo Joseph G."
+                  },
+                  {
+                    "name": "Graham Michael P.",
+                    "parent": "Santo Joseph G."
+                  }
+              ]
+              },
+              {
+                "name": "Clyne Jr. Arthur A.",
+                "parent": "Leone Michael J.",
+                "children":[
+                  {
+                    "name":"Leiber Cynthia",
+                    "parent":"Clyne Jr. Arthur A."
+                  }
+              ]
+              },
+              {
+                "name": "Marinko Todd D.",
+                "parent": "Leone Michael J.",
+                "children":[
+                  {
+                    "name":"Quigley Timothy",
+                    "parent":"Marinko Todd D."
+                  },
+                  {
+                    "name":"Woodson Jeffrey N.",
+                    "parent":"Marinko Todd D."
+                  },
+                  {
+                    "name":"Niersbach Robert D.",
+                    "parent":"Marinko Todd D."
+                  },
+                  {
+                    "name":"Pfefferle Miles D.",
+                    "parent":"Marinko Todd D."
+                  },
+                  {
+                    "name":"Burns Susan M.",
+                    "parent":"Marinko Todd D."
+                  },
+                  {
+                    "name":"Beckman Candice",
+                    "parent":"Marinko Todd D."
+                  }
+              ]
+              },
+              {
+                "name": "Tomlinson Scott A.",
+                "parent": "Leone Michael J."
+              }
+            ]
+          },
+          {
+            "name": "Groves Nicole M.",
+            "parent": "Joseph M.	Mcilwain"
+          }
+        ]
+  }];
+
+//var treeData = ["https://sk-agnihotri.github.io/Hierarchy_Data.json"];
+  // ************** Generate the tree diagram	 *****************
+  var margin = {top: 120, right: 20, bottom: 120, left: 20},
+  	width = 2000 - margin.right - margin.left,
+  	height = 2000 - margin.top - margin.bottom;
+
+  var i = 0,
+  	duration = 1000,
+  	root;
+
+  var tree = d3.layout.tree()
+  	.size([height, width]);
+
+  var diagonal = d3.svg.diagonal()
+  	.projection(function(d) { return [d.x, d.y]; });
+
+
+  var svg = d3.select("body").append("svg")
+  	.attr("width", width + margin.right + margin.left)
+  	.attr("height", height + margin.top + margin.bottom)
+    .append("g")
+  	.attr("transform", "translate(" + margin.bottom + "," + margin.left + ")");
+
+  root = treeData[0];
+  root.x0 = width/2;
+  root.y0 = 0;
+
+  update(root);
+
+  d3.select(self.frameElement).style("width", "300px");
+
+  function update(source) {
+
+    // Compute the new tree layout.
+    var nodes = tree.nodes(root).reverse(),
+  	  links = tree.links(nodes);
+
+    // Normalize for fixed-depth.
+    nodes.forEach(function(d) { d.y = d.depth * 200; });
+
+    // Update the nodes…
+    var node = svg.selectAll("g.node")
+  	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+    // Enter any new nodes at the parent's previous position.
+    var nodeEnter = node.enter().append("g")
+  	  .attr("class", "node")
+  	  .attr("transform", function(d) { return "translate(" + source.x0 + "," + source.y0 + ")"; })
+  	  .on("click", click);
+
+    nodeEnter.append("circle")
+  	  .attr("r", 1e-6)
+  	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+    nodeEnter.append("text")
+  	  .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
+  	  .attr("dy", ".40em")
+  	  .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+  	  .text(function(d) { return d.name; })
+  	  .style("fill-opacity", 1e-6);
+
+    // Transition nodes to their new position.
+    var nodeUpdate = node.transition()
+  	  .duration(duration)
+  	  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+    nodeUpdate.select("circle")
+  	  .attr("r", 5)
+  	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+    nodeUpdate.select("text")
+  	  .style("fill-opacity", 1);
+
+    // Transition exiting nodes to the parent's new position.
+    var nodeExit = node.exit().transition()
+  	  .duration(duration)
+  	  .attr("transform", function(d) { return "translate(" + source.x + "," + source.y + ")"; })
+  	  .remove();
+
+    nodeExit.select("circle")
+  	  .attr("r", 1e-6);
+
+    nodeExit.select("text")
+  	  .style("fill-opacity", 1e-6);
+
+    // Update the links…
+  var link = svg.selectAll("path.link")
+  	  .data(links, function(d) { return d.target.id; });
+
+    // Enter any new links at the parent's previous position.
+    link.enter().insert("path", "g")
+  	  .attr("class", "link")
+  	  .attr("d", function(d) {
+  		var o = {x: source.x0, y: source.y0};
+  		return diagonal({source: o, target: o});
+  	  });
+
+    // Transition links to their new position.
+    link.transition()
+  	  .duration(duration)
+  	  .attr("d", diagonal);
+
+    // Transition exiting nodes to the parent's new position.
+    link.exit().transition()
+  	  .duration(duration)
+  	  .attr("d", function(d) {
+  		var o = {x: source.x, y: source.y};
+  		return diagonal({source: o, target: o});
+  	  })
+  	  .remove();
+
+    // Stash the old positions for transition.
+    nodes.forEach(function(d) {
+  	d.x0 = d.x;
+  	d.y0 = d.y;
+    });
+  }
+
+  // Toggle children on click.
+  function click(d) {
+    if (d.children) {
+  	d._children = d.children;
+  	d.children = null;
+    } else {
+  	d.children = d._children;
+  	d._children = null;
+    }
+    update(d);
+  }
+
+  </script>
+
+
+</html>
